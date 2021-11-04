@@ -12,10 +12,27 @@ body
 {
     text-align:center;
     justify-content:center;
+    position:absolute;
+    top:1%;
+    left:30%;
+    width:50%;
+    height:10%;
+}
+.Roll
+{
+    width:10%;
+    height: 50%;
 }
 .Score
 {
     width:1px;
+    position:relative;
+    font-family:Helvetica;
+    color:white;
+}
+.Rolls
+{
+    width:10%;
     position:relative;
     font-family:Helvetica;
     color:white;

@@ -1,7 +1,11 @@
 const scene = new THREE.Scene();
 let snum = 0;
+let nroll = 100;
 var camera,renderer;
 let meshes = [];
+let Dice = [[]];
+let results = [];
+let totroll= 0;
 scene.background = new THREE.Color(0x000000);
 let x =0;
 let y =0;
@@ -37,10 +41,6 @@ function init()
     camera.position.set(0, 0, -10);
     camera.lookAt(0,0, 0);
     
-
-
-    let D1 = NewDie(1,2,3,4,5,6);
-    console.log(D1);
     AddDie();
 }
 
@@ -48,11 +48,11 @@ function NewDie(s1,s2,s3,s4,s5,s6)
 {
     var die = [s1,s2,s3,s4,s5,s6]
     return die;
-    
 }
 function AddDie()
 {
     let Die = NewDie(1,2,3,4,5,6);
+    Dice.push(Die);
     const geometry = new THREE.BoxGeometry(1, 1, 1); // width, height, depth
     const material = new THREE.MeshLambertMaterial({ color: 0xfb8e00});
     const mesh = new THREE.Mesh(geometry, material);
@@ -62,7 +62,7 @@ function AddDie()
     meshes.push(mesh);
     x=getRandomInt(-9,9);
     y= getRandomInt(-3,3);
-    
+    console.log(Dice);
 }
 function getRandomInt(min, max) 
 {
@@ -75,7 +75,6 @@ var animate = function ()
     console.log("animate reached");
     let score = document.getElementById("Score")
     score.innerHTML = "Score: "+snum;
-    snum+=1;
     for(var i=0;i<meshes.length;i++)
     {
         meshes[i].rotation.x = Date.now() * 0.0005 * (1+i);
@@ -84,10 +83,44 @@ var animate = function ()
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
 }
-
+function Roll()
+{
+    let outStr = "Roll results: ";
+    for(var ctr=1;ctr<Dice.length;ctr++)
+    {
+        results.push(Dice[ctr][getRandomInt(0,Dice[ctr].length-1)]);    
+    }
+    for(var i=0;i<results.length;i++)
+    {
+        totroll+=results[i];
+        if(i==0&&results.length==1)
+        {
+            outStr+=results[i];
+        }
+        else if(i==results.length-1)
+        {
+            outStr+=results[i];
+        }
+        else
+        {
+            outStr+=results[i]+", ";
+        }
+       
+    }
+    outStr+="\nTotal: "+totroll;
+    snum+=totroll;
+    results.length=0;
+    totroll=0;
+    nroll--;
+    const roller = document.getElementById("Rolls");
+    roller.innerHTML ="Rolls: "+nroll;
+    console.log(outStr);
+}
 //var button = document.getElementById("start")
 //button.addEventListener("click",init);
-var button1 = document.getElementById("Add")
+let button1 = document.getElementById("Add");
 button1.addEventListener("click",AddDie);
+let rb = document.getElementById("Roll");
+rb.addEventListener("click",Roll);
 init();
 animate();
