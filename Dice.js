@@ -74,7 +74,7 @@ var animate = function ()
 {
     console.log("animate reached");
     let score = document.getElementById("Score")
-    score.innerHTML = snum;
+    score.innerHTML = "Score: "+snum;
     snum+=1;
     for(var i=0;i<meshes.length;i++)
     {
