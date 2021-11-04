@@ -85,36 +85,45 @@ var animate = function ()
 }
 function Roll()
 {
-    let outStr = "Roll results: ";
-    for(var ctr=1;ctr<Dice.length;ctr++)
+    if(nroll==0)
     {
-        results.push(Dice[ctr][getRandomInt(0,Dice[ctr].length-1)]);    
+        alert("Out of Rolls. Final Score:"+snum);
     }
-    for(var i=0;i<results.length;i++)
+    else
     {
-        totroll+=results[i];
-        if(i==0&&results.length==1)
+        let outStr = "Roll results: ";
+        for(var ctr=1;ctr<Dice.length;ctr++)
         {
-            outStr+=results[i];
+            results.push(Dice[ctr][getRandomInt(0,Dice[ctr].length-1)]);    
         }
-        else if(i==results.length-1)
+        for(var i=0;i<results.length;i++)
         {
-            outStr+=results[i];
-        }
-        else
-        {
-            outStr+=results[i]+", ";
-        }
+            totroll+=results[i];
+            if(i==0&&results.length==1)
+            {
+                outStr+=results[i];
+            }
+            else if(i==results.length-1)
+            {
+                outStr+=results[i];
+            }
+            else
+            {
+                outStr+=results[i]+", ";
+            }
        
+        }
+        outStr+="\nTotal: "+totroll;
+        snum+=totroll;
+        results.length=0;
+        totroll=0;
+        nroll--;
+        const roller = document.getElementById("Rolls");
+        roller.innerHTML ="Rolls: "+nroll;
+        console.log(outStr);
+    
     }
-    outStr+="\nTotal: "+totroll;
-    snum+=totroll;
-    results.length=0;
-    totroll=0;
-    nroll--;
-    const roller = document.getElementById("Rolls");
-    roller.innerHTML ="Rolls: "+nroll;
-    console.log(outStr);
+    
 }
 //var button = document.getElementById("start")
 //button.addEventListener("click",init);
