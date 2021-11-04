@@ -8,20 +8,37 @@ body
     width:100%;
     margin:0%;
 }
+.buttoncontainer
+{
+    text-align:center;
+    justify-content:center;
+}
+.Score
+{
+    width:1px;
+    position:relative;
+    font-family:Helvetica;
+    color:white;
+}
 .canvasContainer
 {
     text-align:center;
-    width:100%;
-    height:
-}
-.canvas
-{
+    margin-right:5%;
+    margin-left:5%;
+    padding:0%;
     border-style:solid;
+    border-width:2px;
     border-color:white;
-    margin: 0px;
     padding:0px;
-    background-color:white;
+    background-color:black;
     max-height:100%;
     max-width:100%;
-    justify-content:center;
+}
+#canvas
+{
+    display:block;
+    margin:0 auto;
+    max-width:100%;
+    max-height:100%;
+    
 }

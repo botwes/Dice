@@ -1,7 +1,18 @@
 <!-- Dice.html -->
 <head>
-    <script type="module" src="Dice.js"></script>
+    <script src="three.js"type="module"></script>
+    <script src="Dice.js"type="module"></script>
+    <link rel="stylesheet" href="Dice.css">
 </head>
 <body>
-    <button type="button" onclick="Init()">Start</button>
+    <div id= "buttons" class="ButtonContainer">
+        <button id="start" class="start" type="button">Start</button>
+        <button id="Add" class="add" type="button">Add</button>
+    </div>
+    
+    <div id="CanvasContainer" class='CanvasContainer'>
+        <div id="Score" class="Score">
+            Score: 
+        </div>
+    </div>
 </body>
