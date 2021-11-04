@@ -72,8 +72,8 @@ function getRandomInt(min, max)
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-var button = document.getElementById("start")
-button.addEventListener("click",init);
+//var button = document.getElementById("start")
+//button.addEventListener("click",init);
 var button1 = document.getElementById("Add")
 button1.addEventListener("click",AddDie);
 init();
