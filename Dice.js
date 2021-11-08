@@ -6,6 +6,7 @@ let meshes = [];
 let Dice = [[]];
 let results = [];
 let totroll= 0;
+let time =0;
 scene.background = new THREE.Color(0x000000);
 let x =0;
 let y =0;
@@ -54,15 +55,16 @@ function AddDie()
     let Die = NewDie(1,2,3,4,5,6);
     Dice.push(Die);
     const geometry = new THREE.BoxGeometry(1, 1, 1); // width, height, depth
-    const material = new THREE.MeshLambertMaterial({ color: 0xfb8e00});
+    const material = new THREE.MeshLambertMaterial({ color: 'white'});
     const mesh = new THREE.Mesh(geometry, material);
     mesh.position.set(x, y, 0);
     console.log("X: "+x+" Y: "+y)
     scene.add(mesh);
     meshes.push(mesh);
-    x=getRandomInt(-9,9);
-    y= getRandomInt(-3,3);
+    x=getRandomInt(-5,5);
+    y= getRandomInt(-2,2);
     console.log(Dice);
+    renderer.render(scene, camera);
 }
 function getRandomInt(min, max) 
 {
@@ -72,15 +74,24 @@ function getRandomInt(min, max)
 }
 var animate = function () 
 {
+    
     console.log("animate reached");
     let score = document.getElementById("Score")
     score.innerHTML = "Score: "+snum;
     for(var i=0;i<meshes.length;i++)
     {
-        meshes[i].rotation.x = Date.now() * 0.0005 * (1+i);
-        meshes[i].rotation.y = Date.now() * 0.001 * (1+i);
+        for(var x=0; x<100;x++)
+        {
+            meshes[i].rotation.x = Date.now() * (getRandomInt(1,10)*.01);
+            meshes[i].rotation.y = Date.now() * (getRandomInt(1,10)*.01);
+
+        }
     }
-    requestAnimationFrame(animate);
+    if (time < 100) 
+    {
+        requestAnimationFrame(animate);
+    }
+    time++;
     renderer.render(scene, camera);
 }
 function Roll()
@@ -120,6 +131,8 @@ function Roll()
         nroll--;
         const roller = document.getElementById("Rolls");
         roller.innerHTML ="Rolls: "+nroll;
+        time=0;
+        animate();
         console.log(outStr);
     
     }
@@ -132,4 +145,4 @@ button1.addEventListener("click",AddDie);
 let rb = document.getElementById("Roll");
 rb.addEventListener("click",Roll);
 init();
-animate();
+//animate();
